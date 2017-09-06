@@ -1,32 +1,43 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addQuest } from "../actions";
+import axios from 'axios';
+
+import QuestList from './QuestList.js'
+import Speedruns from './Speedruns.js';
+import SpeedrunForm from './SpeedrunForm.js';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quest: '',
-      time: ''
+      questsData: [],
+      speedRunningData: []
     }
+    this.loadQuests = this.loadQuests.bind(this);
+    //this.loadSpeedRunnings = this.loadSpeedRunnings.bind(this);
+  }
+
+  loadQuests = () => {
+    axios.get(this.props.url).then(res => {
+      this.setState({data: res.data});
+    })
+  }
+
+  componentDidMount() {
+    this.loadQuests();
   }
 
   render() {
-    return (
+    return(
       <div className="App">
-        <div className="title">
+       <div className="title">
           Monster Hunter Quests Speedrunning
         </div>
-        <button
-          type="button"
-          className="add-quest-button"
-          onClick={() => this.addQuest()}
-        >
-          Add a Quest!
-        </button>
+        <QuestList data={ this.state.questsData } />
+        <Speedruns data={ this.state.speedRunningData } />
+        <SpeedrunForm />
       </div>
-    );
+    )
   }
 }
 

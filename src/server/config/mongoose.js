@@ -1,16 +1,18 @@
-// require mongoose
+// require mongoose:
 var mongoose = require('mongoose');
-// require the fs module for loading model files
+// require fs for reading file names:
 var fs = require('fs');
-// require path for getting the models path
+// require path:
 var path = require('path');
-// connect to mongoose!
-mongoose.connect('mongodb://localhost/mean_polls');// create a variable that points to the path where all of the models live
-var models_path = path.join(__dirname, './../models');
-// read all of the files in the models_path and require (run) each of the javascript files
-fs.readdirSync(models_path).forEach(function(file) {
-if(file.indexOf('.js') >= 0) {
-  // require the file (this runs the model file which registers the schema)
-  require(models_path + '/' + file);
-}
+// overwrite mongoose.Promise with node's Promise:
+mongoose.Promise = global.Promise;
+// connect mongoose to mongodb:
+mongoose.connect('mongodb://localhost/mhspeedruns');
+// store models' path in a variable:
+var models_path = path.join(__dirname, '../models')
+// 1) get strings of all file names in models_path
+// 2) for each filename string, check for substring '.js'
+// 3) if substring '.js' is present, run the file using require
+fs.readdirSync(models_path).forEach(function(filename){
+    if(filename.indexOf('.js') >= 0) require(path.join(models_path, filename));
 });

@@ -1,33 +1,35 @@
-var polls = require('../controllers/polls.js');
+// require all controllers:
+var quests = require('../controllers/quests');
+var speedruns = require('../controllers/speedruns');
 
 module.exports = function(app){
-	//index: Showing collection
-	app.get('/polls', function(req, res) {
-		polls.index(req, res);
-	});
-	app.get('/polls/:id', function(req, res) {
-		polls.show(req, res);
-	});
-	//create: creating into db
-	app.post('/polls', function(req, res) {
-		polls.create(req, res);
-	});
-	//for editing, PUT/POST functionality basically equivalent
-	app.put('/polls/upvote1/:id', function(req, res) {
-		polls.upvote1(req, res);
-	});
-	app.put('/polls/upvote2/:id', function(req, res) {
-		polls.upvote2(req, res);
-	});
-	app.put('/polls/upvote3/:id', function(req, res) {
-		polls.upvote3(req, res);
-	});
-	app.put('/polls/upvote4/:id', function(req, res) {
-		polls.upvote4(req, res);
-	});
-	//deleting
-	app.delete('/polls/:id', function(req, res) {
-		polls.delete(req, res);
-	});
-	
-};
+    // Quests:
+
+    // READ ALL
+    app.get('/quests', function(req, res) {
+        quests.readAllQuests(req, res);
+    });
+
+    // Speedruns:
+
+    // CREATE:
+    app.post('/speedruns/new', function(req, res) {
+        speedruns.createSpeedrun(req, res);
+    })
+    // READ ALL:
+    app.get('/speedruns/all', function(req, res) {
+        speedruns.readAllSpeedruns(req, res);
+    });
+    // READ ONE:
+    app.get('/speedruns/:id', function(req, res) {
+        speedruns.readOneSpeedrun(req, res);
+    });
+    // UPDATE:
+    app.put('/speedruns/update/:id', function(req, res) {
+        speedruns.updateSpeedrun(req, res);
+    });
+    // DELETE:
+    app.delete('/speedruns/delete/:id', function(req, res) {
+        speedruns.deleteSpeedrun(req, res);
+    });
+}
