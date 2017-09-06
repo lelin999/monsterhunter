@@ -41,6 +41,17 @@ module.exports = {
         });
     },
 
+    readSpeedrunsForOneQuest: function(req, res) {
+      var questID = req.params.id;
+      Speedrun.find({ quest_id: questID }, function(err, speedruns) {
+        if (err) {
+          res.json(err);
+        } else {
+          res.json(speedruns);
+        }
+      });
+    },
+
     updateSpeedrun: function(req, res){
         var speedrunID = req.params.id;
         var update = req.body;

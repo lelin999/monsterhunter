@@ -24,6 +24,10 @@ module.exports = function(app){
     app.get('/speedruns/:id', function(req, res) {
         speedruns.readOneSpeedrun(req, res);
     });
+    // READ all speedruns with quest_id of :id
+    app.get('/speedruns/quest/:id', function(req, res) {
+      speedruns.readSpeedrunsForOneQuest(req, res);
+    });
     // UPDATE:
     app.put('/speedruns/update/:id', function(req, res) {
         speedruns.updateSpeedrun(req, res);

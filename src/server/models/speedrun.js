@@ -10,7 +10,9 @@ var SpeedrunSchema = new mongoose.Schema({
     submitted_by: { type: String },
     quest_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Quest' },
     duration: { type: Number },
-    hunters: [ HunterSchema ]
+    hunters: [ HunterSchema ],
+    video_link: { type: String },
+    screenshot_link: { type: String }
 },
 { timestamps: true });
 
