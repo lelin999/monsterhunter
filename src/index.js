@@ -4,8 +4,6 @@ import App from './components/App';
 import "./index.css"
 
 ReactDOM.render(
-  <App 
-    url="http://localhost:8000/quests" 
-  />, 
+  <App />, 
   document.getElementById('root')
 )

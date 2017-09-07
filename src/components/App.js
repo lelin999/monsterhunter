@@ -11,15 +11,33 @@ class App extends Component {
     super(props);
     this.state = {
       questsData: [],
-      speedRunningData: []
+      speedRunningData: [],
+      newSpeedrunData: []
     }
     this.loadQuests = this.loadQuests.bind(this);
-    //this.loadSpeedRunnings = this.loadSpeedRunnings.bind(this);
+    this.loadSpeedruns = this.loadSpeedruns.bind(this);
+    this.handleSpeedrunSubmit = this.handleSpeedrunSubmit.bind(this);
   }
 
   loadQuests = () => {
-    axios.get(this.props.url).then(res => {
+    axios.get("http://localhost:8000/quests").then(res => {
       this.setState({questsData: res.data});
+    }).catch(err => {
+      console.log("error", err);
+    })
+  }
+
+  loadSpeedruns = () => {
+    axios.get("http://localhost:8000/speedruns/all").then(res => {
+      this.setState({speedRunningData: res.data});
+    }).catch(err => {
+      console.log("error", err);
+    })
+  }
+
+  handleSpeedrunSubmit = (speedrun) => {
+    axios.post("http://localhost:8000/speedruns/new").then(res => {
+      this.setState({newSpeedrunData: res.data});
     }).catch(err => {
       console.log("error", err);
     })
@@ -27,6 +45,7 @@ class App extends Component {
 
   componentDidMount() {
     this.loadQuests();
+    this.loadSpeedruns();
     console.log(this.state, "state");
   }
 
@@ -38,7 +57,7 @@ class App extends Component {
         </div>
         <QuestList data={ this.state.questsData } />
         <Speedruns data={ this.state.speedRunningData } />
-        <SpeedrunForm />
+        <SpeedrunForm onSpeedrunSubmit={ this.handleSpeedrunSubmit } />
       </div>
     )
   }

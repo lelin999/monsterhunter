@@ -15,7 +15,7 @@ class QuestList extends Component {
 
     return(
       <div className="QuestList">
-        { quests }
+        quests stuff would go here
       </div>
     )
   }

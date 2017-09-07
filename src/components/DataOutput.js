@@ -4,7 +4,7 @@ class DataOutput extends Component {
   render() {
     return(
       <div className="DataOutput">
-      Dataoutput
+        { this.props.submitted_by } { this.props.duration }
       </div>
     )
   }
