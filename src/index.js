@@ -5,7 +5,7 @@ import "./index.css"
 
 ReactDOM.render(
   <App 
-    url="http://localhost:8000" 
+    url="http://localhost:8000/quests" 
   />, 
   document.getElementById('root')
 )

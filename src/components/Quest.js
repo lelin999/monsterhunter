@@ -4,7 +4,7 @@ class Quest extends Component {
   render() {
     return(
       <div className="Quest">
-      quest stuff here
+        { this.props.name }
       </div>
     )
   }

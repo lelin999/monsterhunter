@@ -19,12 +19,15 @@ class App extends Component {
 
   loadQuests = () => {
     axios.get(this.props.url).then(res => {
-      this.setState({data: res.data});
+      this.setState({questsData: res.data});
+    }).catch(err => {
+      console.log("error", err);
     })
   }
 
   componentDidMount() {
     this.loadQuests();
+    console.log(this.state, "state");
   }
 
   render() {
@@ -42,11 +45,3 @@ class App extends Component {
 }
 
 export default App;
-
-//strings of names of quests in an API/arrayx
-//last 5-10 entries displayed from MongoDB
-// -> entry time, entry itself, entryID, entry entered
-//particular monster (relating to quest)/quest/ranks
-// autocomplete -> shows up relevant quests relating to input
-
-//react-routing,  
