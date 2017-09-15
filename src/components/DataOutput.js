@@ -5,6 +5,7 @@ class DataOutput extends Component {
     return(
       <div className="DataOutput">
         { this.props.submitted_by } { this.props.duration }
+        some stuff goes here from dataoutput
       </div>
     )
   }

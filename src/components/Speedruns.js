@@ -5,7 +5,8 @@ class Speedruns extends Component {
   render() {
     let outputTab = this.props.data.map(output => {
       return (
-        <DataOutput submitted_by={ output.submitted_by } quest_id={ output.quest_id } duration={ output.duration } key={ output.id } >
+        <DataOutput submitted_by={ output.submitted_by } quest_id={ output.quest_id } duration={ output.duration } key={ output["_id"] } >
+          { output["_id"] }
           { output.submitted_by }
           { output.quest_id }
           { output.duration }

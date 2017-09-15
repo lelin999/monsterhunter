@@ -35,29 +35,36 @@ class App extends Component {
     })
   }
 
+
+//tie below to a handle
   handleSpeedrunSubmit = (speedrun) => {
-    axios.post("http://localhost:8000/speedruns/new").then(res => {
-      this.setState({newSpeedrunData: res.data});
-    }).catch(err => {
-      console.log("error", err);
+    let speedRuns = this.state.speedRunningData;
+    let newSpeedRuns = speedRuns.concat([speedrun]);
+    this.setState({speedRunningData: newSpeedRuns});
+    axios.post("http://localhost:8000/speedruns/new", speedrun).then(res => {
+      console.log(res);
     })
+    .catch(err => {
+      console.log("error", err);
+      this.setState({speedRunningData: speedRuns});
+    })
+    console.log(this.state, "handleSubmit state");
   }
 
   componentDidMount() {
     this.loadQuests();
     this.loadSpeedruns();
-    console.log(this.state, "state");
   }
 
   render() {
     return(
       <div className="App">
-       <div className="title">
+        <div className="title">
           Monster Hunter Quests Speedrunning
         </div>
         <QuestList data={ this.state.questsData } />
+        <SpeedrunForm onSpeedrunSubmit={ this.handleSpeedrunSubmit } questsData={ this.state.questsData }/>
         <Speedruns data={ this.state.speedRunningData } />
-        <SpeedrunForm onSpeedrunSubmit={ this.handleSpeedrunSubmit } />
       </div>
     )
   }

@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
+
+const getSuggestions = (value) => {
+  
+}
 
 class SpeedrunForm extends Component {
   constructor(props) {
@@ -32,9 +37,9 @@ class SpeedrunForm extends Component {
     event.preventDefault();
     //trim a little just in case
     let submitted_by = this.state.submitted_by.trim();
-    let quest_id = this.state.quest_id;
+    // let quest_id = this.state.quest_id;
     let duration = this.state.duration;
-    this.props.onSpeedrunSubmit({submitted_by, quest_id, duration});
+    this.props.onSpeedrunSubmit({submitted_by: submitted_by, duration: duration});
     this.setState({submitted_by: '', quest_id: '', duration: ''});
   }
 
