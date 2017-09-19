@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import Autosuggest from 'react-autosuggest';
+import AutosuggestComponent from './AutosuggestComponent.js';
 
-const getSuggestions = (value) => {
-  
-}
+const quests = [];
 
 class SpeedrunForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       submitted_by: '',
-      quest_id: '',
       duration: '',
       hunters: '',
-
+      quest_id: '',
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleQuestChange = this.handleQuestChange.bind(this);
@@ -25,8 +22,8 @@ class SpeedrunForm extends Component {
     this.setState({submitted_by: event.target.value});
   }
 
-  handleQuestChange = (event) => {
-    this.setState({quest_id: event.target.value});
+  handleQuestChange = (event, { newValue }) => {
+    this.setState({quest_id: newValue});
   }
 
   handleTimeChange = (event) => {
@@ -51,10 +48,8 @@ class SpeedrunForm extends Component {
             placeholder="Username"
             onChange={ this.handleNameChange }
           />
-          <input
-            placeholder="Quest Name"
-            onChange={ this.handleQuestChange }
-          />
+          <AutosuggestComponent />
+          {this.props.questsData}
           <input
             placeholder="Time"
             onChange={ this.handleTimeChange }
@@ -71,5 +66,3 @@ class SpeedrunForm extends Component {
 }
 
 export default SpeedrunForm;
-
-//autocomplete quests
